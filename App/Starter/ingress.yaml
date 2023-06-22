@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todoapp
+  namespace: gcamacho
+  annotations:
+    # add the HTTP listener and redirect config to AppGw
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "azure/application-gateway"
+    appgw.ingress.kubernetes.io/use-private-ip: "true"
+    appgw.ingress.kubernetes.io/appgw-ssl-certificate: appgw-cert
+  labels:
+    app: todoapp
+    version: 1.0
+spec:
+  #defaultBackend:
+  #  service:
+  #    name: default-backend
+  #    port:
+  #      number: 80
+  rules:
+  - host: todoapp-dev.house.gov
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: todoapp
+              port:
+                number: 80
