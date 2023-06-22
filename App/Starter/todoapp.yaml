@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: todoapp
-        image: azcrcontainersworkshop.azurecr.io/todoapp:v1
+        image: acrhubpri.azurecr.io/dkhau/workshoptodoapp:v1
         resources:
           requests:
             cpu: 100m
